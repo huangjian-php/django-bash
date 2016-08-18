@@ -1,6 +1,6 @@
 #!/bin/bash
 
-echo "安装将花费一定时间，请耐心等待直到安装完成......"
+echo "Please wait......"
 
 yum -y groupinstall "Development tools"
 yum install -y tk zlib-devel openssl-devel perl cpio expat-devel gettext-devel asciidoc xmlto libcurl-devel bzip2-devel ncurses-devel sqlite-devel
@@ -55,7 +55,7 @@ ln -sf /usr/local/python2.7/bin/pip /usr/bin/pip
 ln -sf /usr/local/python2.7/bin/easy_install /usr/bin/easy_install
 
 # django 1.8.5 & uWSGI 2.0.12
-pip install Django==1.8.5 uWSGI==2.0.12
+pip install Django==1.8.5 uWSGI==2.0.12 supervisor
 
 # uWSGI 2.0.1
 wget http://projects.unbit.it/downloads/uwsgi-2.0.1.tar.gz
@@ -80,17 +80,17 @@ cp ~/django-bash/django_test/* /var/www/ -R
 /etc/init.d/supervisord restart
 
 # git 2.9
-#yum remove -y git
-#wget -c http://ftp.gnu.org/pub/gnu/libiconv/libiconv-1.14.tar.gz
-#cd libiconv-1.14
-#./configure --prefix=/usr/local/libiconv && make && make install
-#ln -s /usr/local/lib/libiconv.so /usr/lib
-#ln -s /usr/local/lib/libiconv.so.2 /usr/lib
-#
-#wget -c https://www.kernel.org/pub/software/scm/git/git-2.9.3.tar.xz
-#tar xf git-2.9.3.tar.xz
-#cd git-2.9.3
-#./configure --prefix=/usr/local --with-gitconfig=/etc/gitconfig --with-iconv=/usr/local/libiconv --with-curl=/usr/bin/curl && make
-#
-#make install
-#PATH=$PATH:/usr/local/libexec/git-core
+yum remove -y git
+wget -c http://ftp.gnu.org/pub/gnu/libiconv/libiconv-1.14.tar.gz
+cd libiconv-1.14
+./configure --prefix=/usr/local/libiconv && make && make install
+ln -s /usr/local/lib/libiconv.so /usr/lib
+ln -s /usr/local/lib/libiconv.so.2 /usr/lib
+
+wget -c https://www.kernel.org/pub/software/scm/git/git-2.9.3.tar.xz
+tar xf git-2.9.3.tar.xz
+cd git-2.9.3
+./configure --prefix=/usr/local --with-gitconfig=/etc/gitconfig --with-iconv=/usr/local/libiconv --with-curl=/usr/bin/curl && make
+
+make install
+PATH=$PATH:/usr/local/libexec/git-core
