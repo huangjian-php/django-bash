@@ -1,7 +1,6 @@
 #!/bin/bash
 
 echo "Please wait......"
-
 yum -y groupinstall "Development tools"
 yum install -y tk zlib-devel openssl-devel perl cpio expat-devel gettext-devel asciidoc xmlto libcurl-devel bzip2-devel ncurses-devel sqlite-devel
 
@@ -28,26 +27,9 @@ cd Python-2.7.10
 make && make install
 mv /usr/bin/python /usr/bin/python2.6
 ln -s /usr/local/python2.7/bin/python2.7 /usr/bin/python
-#echo "export PATH="/usr/local/python2.7/bin:$PATH"" >> /etc/profile
-#source /etc/profile
 sed -i '1s/.*/#!\/usr\/bin\/python2.6/' /usr/bin/yum
-#sed -i '1s/.*/#!\/usr\/bin\/python2.6 -tt/' /usr/bin/yum-builddep
-#sed -i '1s/.*/#!\/usr\/bin\/python2.6 -tt/' /usr/bin/yum-config-manager
-#sed -i '1s/.*/#!\/usr\/bin\/python2.6 -tt/' /usr/bin/yum-debug-dump
-#sed -i '1s/.*/#!\/usr\/bin\/python2.6 -tt/' /usr/bin/yum-debug-restore
-#sed -i '1s/.*/#!\/usr\/bin\/python2.6/' /usr/bin/yumdownloader 
-#sed -i '1s/.*/#!\/usr\/bin\/python2.6 -tt/' /usr/bin/yum-groups-manager
 
 # pip 8.1
-#wget -c --no-check-certificate https://pypi.python.org/packages/source/s/setuptools/setuptools-1.4.2.tar.gz
-#tar -xvf setuptools-1.4.2.tar.gz
-#cd setuptools-1.4.2
-#python2.7 setup.py install
-
-#wget -c https://pypi.python.org/packages/source/p/pip/pip-8.1.1.tar.gz
-#tar -xzvf pip-8.1.1.tar.gz
-#cd pip-8.1.1
-#python setup.py install
 wget https://bootstrap.pypa.io/get-pip.py
 python get-pip.py
 
@@ -75,22 +57,17 @@ chkconfig supervisord on
 cp ~/django-bash/supervisord.conf /etc/supervisord.conf
 cp ~/django-bash/django-supervisord.conf /etc/supervisor/conf.d/
 
-# test
-cp ~/django-bash/django_test/* /var/www/ -R
-/etc/init.d/supervisord restart
-
 # git 2.9
 yum remove -y git
-wget -c http://ftp.gnu.org/pub/gnu/libiconv/libiconv-1.14.tar.gz
-cd libiconv-1.14
-./configure --prefix=/usr/local/libiconv && make && make install
-ln -s /usr/local/lib/libiconv.so /usr/lib
-ln -s /usr/local/lib/libiconv.so.2 /usr/lib
-
 wget -c https://www.kernel.org/pub/software/scm/git/git-2.9.3.tar.xz
 tar xf git-2.9.3.tar.xz
 cd git-2.9.3
-./configure --prefix=/usr/local --with-gitconfig=/etc/gitconfig --with-iconv=/usr/local/libiconv --with-curl=/usr/bin/curl && make
+make prefix=/usr/local/git all
+make prefix=/usr/local/git install
+echo "export PATH=$PATH:/usr/local/git/bin" >> /etc/bashrc
+source /etc/bashrc
+ln -s /usr/local/git/bin/git /usr/bin/git
 
-make install
-PATH=$PATH:/usr/local/libexec/git-core
+# test
+cp ~/django-bash/django_test/* /var/www/ -R
+/etc/init.d/supervisord restart
