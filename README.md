@@ -16,4 +16,6 @@
     </pre>
 + 部署项目:
     <pre>
+    # 设置好你的项目后, 进入到django项目下的uwsgi.py所在目录, 复制以下命令并执行即可:
+    bash ~/django-bash/django-deploy.sh $PWD $(dirname $PWD)
     </pre>
