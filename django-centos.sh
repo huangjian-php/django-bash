@@ -69,10 +69,15 @@ ln -s /usr/local/uwsgi/uwsgi /usr/bin/uwsgi
 
 # supervisor
 mkdir -p /etc/supervisor/conf.d
+mkdir -p /data/supervisor
 yum install -y supervisor
 chkconfig supervisord on
 cp ~/django-bash/supervisord.conf /etc/supervisord.conf
 cp ~/django-bash/django-supervisord.conf /etc/supervisor/conf.d/
+
+# test
+cp ~/django-bash/django_test/* /var/www/ -R
+/etc/init.d/supervisord restart
 
 # git 2.9
 #yum remove -y git
