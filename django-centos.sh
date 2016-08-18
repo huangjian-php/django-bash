@@ -69,5 +69,5 @@ source /etc/bashrc
 ln -s /usr/local/git/bin/git /usr/bin/git
 
 # test
-cp ~/django-bash/django_test/* /var/www/ -R
+cp ~/django-bash/django_test /var/www/ -R
 /etc/init.d/supervisord restart
