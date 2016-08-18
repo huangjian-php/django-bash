@@ -5,7 +5,6 @@ yum -y groupinstall "Development tools"
 yum install -y tk zlib-devel openssl-devel perl cpio expat-devel gettext-devel asciidoc xmlto libcurl-devel bzip2-devel ncurses-devel sqlite-devel
 
 # nginx 1.10
-git clone https://github.com/huangjian-php/django-bash.git ~/django-bash
 mkdir -p /data/nginx
 mkdir -p /var/www/static
 cd ~/django-bash

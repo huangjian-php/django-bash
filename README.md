@@ -10,7 +10,7 @@
 + 安装方法:
     <pre>
     # 连接服务器终端, 直接复制以下命令并执行, 然后等待完成:
-    git clone https://github.com/huangjian-php/django-bash.git /tmp/django-bash && bash /tmp/django-bash/django-centos.sh
+    git clone https://github.com/huangjian-php/django-bash.git ~/django-bash && bash ~/django-bash/django-centos.sh
 
     # 完成后直接访问服务器ip, 出现django默认界面即配置成功
     </pre>
