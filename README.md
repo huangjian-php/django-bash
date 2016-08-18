@@ -19,3 +19,8 @@
     # 设置好你的项目后, 进入到django项目下的uwsgi.py所在目录, 复制以下命令并执行即可:
     bash ~/django-bash/django-deploy.sh $PWD $(dirname $PWD)
     </pre>
++ 重启Nginx与uWSGI
+    <pre>
+    # 直接执行以下命令：
+    supervisorctl restart all
+    </pre>
